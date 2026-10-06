@@ -1,5 +1,6 @@
 const express = require("express")
 const Product = require("../models/product")
+const controller = require("../controllers/product")
 
 const router = new express.Router()
 
@@ -15,9 +16,12 @@ router.get("/api/products", async (req, res, next) => {
   }
 })
 
-// TODO: POST /api/products
-// TODO: PATCH /api/products/:sku
-// TODO: DELETE /api/products/:sku
-// TODO: PATCH /api/products/:sku/stock
+router.post("/api/products", controller.createProduct)
+
+router.patch("/api/products/:sku", controller.updateProduct)
+
+router.delete("/api/products/:sku", controller.deleteProduct)
+
+router.patch("/api/products/:sku/stock", controller.adjustStock)
 
 module.exports = router
